@@ -1,0 +1,14 @@
+bot_token: ""
+gh_token: ""
+rom_name: ""
+channel_username: ""
+support_group_username: ""
+website_url:  ""
+official_devices_repo: ""
+device_json_paths:
+  - ""
+show_device_infos_of_all_paths: false
+device_json_structure: {
+}
+message_format: |
+  Message Format Here
