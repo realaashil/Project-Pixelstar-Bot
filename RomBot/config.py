@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Callable, Dict, List
 
 from NoobStuffs.libyamlconfig import YAMLConfig
 
@@ -35,3 +35,6 @@ class Config:
         return_type=dict,
     )
     MESSAGE_TEMPLATE: str = config.getConfig("message_template", is_required=True)
+    BOT_PLACEHOLDERS: Dict[str, Callable[..., str]] = {
+        "bot_codename": lambda device: device,
+    }

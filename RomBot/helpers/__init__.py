@@ -6,3 +6,4 @@ from RomBot.helpers.message_helper import (
     extract_placeholders,
     process_message,
 )
+from RomBot.helpers.placeholder_helper import call_bot_placeholder

@@ -6,6 +6,8 @@ from github import GithubException
 from RomBot import gh
 from RomBot.config import Config
 
+from .placeholder_helper import call_bot_placeholder
+
 
 def extract_data(
     data: Dict[str, Any],
@@ -52,6 +54,8 @@ def get_info(device: str) -> Dict[str, Dict[str, Union[bool, int, str]]]:
             ).decoded_content.decode()
             info = json.loads(content)
             path_info = extract_data(info, Config.DEVICE_JSON_STRUCTURE)
+            for key, placeholder in Config.BOT_PLACEHOLDERS.items():
+                path_info[key] = call_bot_placeholder(placeholder, device)
             device_info[path] = path_info
         except GithubException:
             pass
