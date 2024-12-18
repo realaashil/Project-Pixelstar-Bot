@@ -1,0 +1,35 @@
+name: Deploy Python App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: main-server
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Create config.yaml
+        run: |
+          echo "${{ secrets.CONFIG_YAML }}" > config.yaml
+
+      - name: Restart the application
+        run: |
+          pkill -f "python -m RomBot" || true
+          nohup python3 -m RomBot &
